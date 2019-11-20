@@ -82,7 +82,7 @@ analytics:
 author:
   name             : "Peng Xu"
   avatar           : "profile.png"
-  bio              : "Test"
+  bio              : "Research Associate at Columbia University"
   location         : "New York, New York"
   employer         :
   pubmed           :  # "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
@@ -103,10 +103,12 @@ author:
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
   linkedin         :
+  wordpress        : randetermined
   orcid            : # "http://orcid.org/yourorcidurl"
   pinterest        :
   soundcloud       :
-  stackoverflow    : https://stats.stackexchange.com/users/29905
+  stackoverflow    :
+  stackexchange    : 29905
   steam            :
   tumblr           :
   twitter          : 
