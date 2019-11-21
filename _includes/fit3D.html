@@ -1,4 +1,90 @@
-<script>
+<script>/*
+ * Copyright (C) 2009 Apple Inc. All Rights Reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
+ * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+ * Copyright (2016) Duncan Murdoch - fixed CanvasMatrix4.ortho,
+ * cleaned up.
+ */
+/*
+    CanvasMatrix4 class
+
+    This class implements a 4x4 matrix. It has functions which
+    duplicate the functionality of the OpenGL matrix stack and
+    glut functions.
+
+    IDL:
+
+    [
+        Constructor(in CanvasMatrix4 matrix),           // copy passed matrix into new CanvasMatrix4
+        Constructor(in sequence<float> array)           // create new CanvasMatrix4 with 16 floats (row major)
+        Constructor()                                   // create new CanvasMatrix4 with identity matrix
+    ]
+    interface CanvasMatrix4 {
+        attribute float m11;
+        attribute float m12;
+        attribute float m13;
+        attribute float m14;
+        attribute float m21;
+        attribute float m22;
+        attribute float m23;
+        attribute float m24;
+        attribute float m31;
+        attribute float m32;
+        attribute float m33;
+        attribute float m34;
+        attribute float m41;
+        attribute float m42;
+        attribute float m43;
+        attribute float m44;
+
+        void load(in CanvasMatrix4 matrix);                 // copy the values from the passed matrix
+        void load(in sequence<float> array);                // copy 16 floats into the matrix
+        sequence<float> getAsArray();                       // return the matrix as an array of 16 floats
+        WebGLFloatArray getAsCanvasFloatArray();           // return the matrix as a WebGLFloatArray with 16 values
+        void makeIdentity();                                // replace the matrix with identity
+        void transpose();                                   // replace the matrix with its transpose
+        void invert();                                      // replace the matrix with its inverse
+
+        void translate(in float x, in float y, in float z); // multiply the matrix by passed translation values on the right
+        void scale(in float x, in float y, in float z);     // multiply the matrix by passed scale values on the right
+        void rotate(in float angle,                         // multiply the matrix by passed rotation values on the right
+                    in float x, in float y, in float z);    // (angle is in degrees)
+        void multRight(in CanvasMatrix matrix);             // multiply the matrix by the passed matrix on the right
+        void multLeft(in CanvasMatrix matrix);              // multiply the matrix by the passed matrix on the left
+        void ortho(in float left, in float right,           // multiply the matrix by the passed ortho values on the right
+                   in float bottom, in float top,
+                   in float near, in float far);
+        void frustum(in float left, in float right,         // multiply the matrix by the passed frustum values on the right
+                     in float bottom, in float top,
+                     in float near, in float far);
+        void perspective(in float fovy, in float aspect,    // multiply the matrix by the passed perspective values on the right
+                         in float zNear, in float zFar);
+        void lookat(in float eyex, in float eyey, in float eyez,    // multiply the matrix by the passed lookat
+                    in float ctrx, in float ctry, in float ctrz,    // values on the right
+                    in float upx, in float upy, in float upz);
+    }
+*/
+
 CanvasMatrix4 = function(m)
 {
     if (typeof m == 'object') {
@@ -137,9 +223,9 @@ CanvasMatrix4.prototype.transpose = function()
 
 CanvasMatrix4.prototype.invert = function()
 {
-    
-    
-    
+    // Calculate the 4x4 determinant
+    // If the determinant is zero,
+    // then the inverse matrix is not unique.
     var det = this._determinant4x4();
 
     if (Math.abs(det) < 1e-8)
@@ -147,7 +233,7 @@ CanvasMatrix4.prototype.invert = function()
 
     this._makeAdjoint();
 
-    
+    // Scale the adjoint matrix to get the inverse
     this.m11 /= det;
     this.m12 /= det;
     this.m13 /= det;
@@ -211,7 +297,7 @@ CanvasMatrix4.prototype.scale = function(x,y,z)
 
 CanvasMatrix4.prototype.rotate = function(angle,x,y,z)
 {
-    
+    // angles are in degrees. Switch to radians
     angle = angle / 180 * Math.PI;
 
     angle /= 2;
@@ -219,10 +305,10 @@ CanvasMatrix4.prototype.rotate = function(angle,x,y,z)
     var cosA = Math.cos(angle);
     var sinA2 = sinA * sinA;
 
-    
+    // normalize
     var length = Math.sqrt(x * x + y * y + z * z);
     if (length === 0) {
-        
+        // bad vector, just use something reasonable
         x = 0;
         y = 0;
         z = 1;
@@ -234,7 +320,7 @@ CanvasMatrix4.prototype.rotate = function(angle,x,y,z)
 
     var mat = new CanvasMatrix4();
 
-    
+    // optimize case where axis is along major axis
     if (x == 1 && y === 0 && z === 0) {
         mat.m11 = 1;
         mat.m12 = 0;
@@ -484,9 +570,9 @@ CanvasMatrix4.prototype.lookat = function(eyex, eyey, eyez, centerx, centery, ce
 {
     var matrix = new CanvasMatrix4();
 
-    
+    // Make rotation matrix
 
-    
+    // Z vector
     var zx = eyex - centerx;
     var zy = eyey - centery;
     var zz = eyez - centerz;
@@ -497,23 +583,23 @@ CanvasMatrix4.prototype.lookat = function(eyex, eyey, eyez, centerx, centery, ce
         zz /= mag;
     }
 
-    
+    // Y vector
     var yx = upx;
     var yy = upy;
     var yz = upz;
 
-    
+    // X vector = Y cross Z
     xx =  yy * zz - yz * zy;
     xy = -yx * zz + yz * zx;
     xz =  yx * zy - yy * zx;
 
-    
+    // Recompute Y = Z cross X
     yx = zy * xz - zz * xy;
     yy = -zx * xz + zz * xx;
     yx = zx * xy - zy * xx;
 
-    
-    
+    // cross product gives area of parallelogram, which is < 1.0 for
+    // non-perpendicular unit-length vectors; so normalize x, y here
 
     mag = Math.sqrt(xx * xx + xy * xy + xz * xz);
     if (mag) {
@@ -553,7 +639,7 @@ CanvasMatrix4.prototype.lookat = function(eyex, eyey, eyez, centerx, centery, ce
     this.multRight(matrix);
 };
 
-
+// Support functions
 CanvasMatrix4.prototype._determinant2x2 = function(a, b, c, d)
 {
     return a * d - b * c;
@@ -616,7 +702,7 @@ CanvasMatrix4.prototype._makeAdjoint = function()
     var c4 = this.m43;
     var d4 = this.m44;
 
-    
+    // Row column labeling reversed since we transpose rows & columns
     this.m11  =   this._determinant3x3(b2, b3, b4, c2, c3, c4, d2, d3, d4);
     this.m21  = - this._determinant3x3(a2, a3, a4, c2, c3, c4, d2, d3, d4);
     this.m31  =   this._determinant3x3(a2, a3, a4, b2, b3, b4, d2, d3, d4);
@@ -637,7 +723,15 @@ CanvasMatrix4.prototype._makeAdjoint = function()
     this.m34  = - this._determinant3x3(a1, a2, a3, b1, b2, b3, d1, d2, d3);
     this.m44  =   this._determinant3x3(a1, a2, a3, b1, b2, b3, c1, c2, c3);
 };</script>
-<script>
+<script>// To generate the help pages for this library, use
+
+// jsdoc --destination ../../../doc/rglwidgetClass --template ~/node_modules/jsdoc-baseline rglClass.src.js
+
+// To validate, use
+
+// setwd(".../inst/htmlwidgets/lib/rglClass")
+// hints <- js::jshint(readLines("rglClass.src.js"))
+// hints[, c("line", "reason")]
 
 /**
  * The class of an rgl widget
@@ -1061,7 +1155,7 @@ rglwidgetClass = function() {
           ids = [id], i;
       if (typeof obj !== "undefined" && typeof (obj.newIds) !== "undefined")
         ids = ids.concat(obj.newIds);
-      thesub.objects = [].concat(thesub.objects); 
+      thesub.objects = [].concat(thesub.objects); // It might be a scalar
       for (j=0; j<ids.length;j++) {
         id = ids[j];
         i = thesub.objects.indexOf(id);
@@ -1263,7 +1357,7 @@ rglwidgetClass = function() {
         
       result = result + "  }\n";
 
-      
+      // console.log(result);
       return result;
     };
 
@@ -1431,11 +1525,11 @@ rglwidgetClass = function() {
       } else
         result = result +   "   gl_FragColor = lighteffect;\n";
 
-      
-      
+      //if (fat_lines)
+      //  result = result +   "   gl_FragColor = vec4(0.0, abs(point.x), abs(point.y), 1.0);"
       result = result + "  }\n";
 
-      
+      // console.log(result);
       return result;
     };
 
@@ -1631,13 +1725,13 @@ rglwidgetClass = function() {
          this.setprMatrix(subscene.parent);
        if (embedding === "inherit")
          return;
-       
+       // This is based on the Frustum::enclose code from geom.cpp
        var bbox = subscene.par3d.bbox,
            scale = subscene.par3d.scale,
            ranges = [(bbox[1]-bbox[0])*scale[0]/2,
                      (bbox[3]-bbox[2])*scale[1]/2,
                      (bbox[5]-bbox[4])*scale[2]/2],
-           radius = Math.sqrt(this.sumsq(ranges))*1.1; 
+           radius = Math.sqrt(this.sumsq(ranges))*1.1; // A bit bigger to handle labels
        if (radius <= 0) radius = 1;
        var observer = subscene.par3d.observer,
            distance = observer[2],
@@ -1850,7 +1944,7 @@ rglwidgetClass = function() {
       obj.vertices = [];
       obj.initialized = false;
       for (elem = 0; elem < nPlanes; elem++) {
-
+//    Vertex Av = normal.getRecycled(elem);
         x = [];
         A = obj.normals[elem];
         d = obj.offsets[elem][0];
@@ -2041,14 +2135,14 @@ rglwidgetClass = function() {
         this.getVertexShader(id) ));
       gl.attachShader(obj.prog, this.getShader( gl.FRAGMENT_SHADER,
                       this.getFragmentShader(id) ));
-      
+      //  Force aPos to location 0, aCol to location 1
       gl.bindAttribLocation(obj.prog, 0, "aPos");
       gl.bindAttribLocation(obj.prog, 1, "aCol");
       gl.linkProgram(obj.prog);
       var linked = gl.getProgramParameter(obj.prog, gl.LINK_STATUS);
       if (!linked) {
 
-        
+        // An error occurred while linking
         var lastError = gl.getProgramInfoLog(obj.prog);
         console.warn("Error in program linking:" + lastError);
 
@@ -2155,7 +2249,7 @@ rglwidgetClass = function() {
     if (typeof obj.radii !== "undefined") {
       radofs = stride;
       stride = stride + 1;
-      
+      // FIXME:  always concat the radii?
       if (obj.radii.length === v.length) {
         v = this.cbind(v, obj.radii);
       } else if (obj.radii.length === 1) {
@@ -2164,7 +2258,7 @@ rglwidgetClass = function() {
     } else
       radofs = -1;
       
-    
+    // Add default indices
     f = Array(v.length);
     for (i = 0; i < v.length; i++)
       f[i] = i;
@@ -2256,7 +2350,7 @@ rglwidgetClass = function() {
       obj.userAttribSizes = {};
       for (attr in obj.userAttributes) {
       	obj.userAttribLocations[attr] = gl.getAttribLocation(obj.prog, attr);
-      	if (obj.userAttribLocations[attr] >= 0) { 
+      	if (obj.userAttribLocations[attr] >= 0) { // Attribute may not have been used
       	  obj.userAttribOffsets[attr] = stride;
       	  v = this.cbind(v, obj.userAttributes[attr]);
       	  stride = v[0].length;
@@ -2331,7 +2425,7 @@ rglwidgetClass = function() {
       	if (pmode === "culled")
       	  f = [];
         else if (pmode === "points") {
-          
+          // stay with default
         } else if ((type === "quads" || type === "text" ||
              type === "sprites") && !sprites_3d) {
           nrows = Math.floor(obj.vertexCount/4);
@@ -2377,7 +2471,7 @@ rglwidgetClass = function() {
       	    }
           }
         } else if (type === "spheres") {
-          
+          // default
         } else if (type === "surface") {
           dim = obj.dim[0];
           nx = dim[0];
@@ -2423,7 +2517,7 @@ rglwidgetClass = function() {
       obj.pointLoc = gl.getAttribLocation(obj.prog, "aPoint");
       obj.aspectLoc = gl.getUniformLocation(obj.prog, "uAspect");
       obj.lwdLoc = gl.getUniformLocation(obj.prog, "uLwd");
-      
+      // Expand vertices to turn each segment into a pair of triangles
         
       	for (pass = 0; pass < obj.passes; pass++) {
       	  f = obj.f[pass];	
@@ -2442,10 +2536,10 @@ rglwidgetClass = function() {
           fpt = new Array(nrows), 
           pt, start, gap = type === "linestrip" ? 3 : 1;
       
-      
-      
-      
-      
+      // We're going to turn each pair of vertices into 4 new ones, with the "next" and "pt" attributes
+      // added.
+      // We do this by copying the originals in the first pass, adding the new attributes, then in a 
+      // second pass add new vertices at the end.
 
       for (i = 0; i < v.length; i++) {
         vnew[i] = v[i].concat([0,0,0,0,0]); 
@@ -2455,7 +2549,7 @@ rglwidgetClass = function() {
       pointofs = stride + 3;
       stride = stride + 5;
             
-      
+      // Now add the extras
       last = v.length - 1;
       ind = 0;
       alias = new Array(f.length);
@@ -2496,12 +2590,12 @@ rglwidgetClass = function() {
       vnew.length = last+1;
       v = vnew;
       obj.vertexCount = v.length;
-      if (typeof alias !== "undefined" && typeof obj.alias !== "undefined") {  
+      if (typeof alias !== "undefined" && typeof obj.alias !== "undefined") {  // Already have aliases from previous section?
         var oldalias = obj.alias, newalias = Array(obj.alias.length);
         for (i = 0; i < newalias.length; i++) {
           newalias[i] = oldalias[i].slice();
           for (j = 0; j < oldalias[i].length; j++)
-            Array.prototype.push.apply(newalias[i], alias[oldalias[j]]); 
+            Array.prototype.push.apply(newalias[i], alias[oldalias[j]]); // pushes each element 
         }
         obj.alias = newalias;
       } else
@@ -2543,7 +2637,7 @@ rglwidgetClass = function() {
     if (type !== "spheres" && !sprites_3d) {
       obj.buf = gl.createBuffer();
       gl.bindBuffer(gl.ARRAY_BUFFER, obj.buf);
-      gl.bufferData(gl.ARRAY_BUFFER, obj.values, gl.STATIC_DRAW); 
+      gl.bufferData(gl.ARRAY_BUFFER, obj.values, gl.STATIC_DRAW); //
       obj.ibuf = Array(obj.passes);
       obj.ibuf[0] = gl.createBuffer();
       gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, obj.ibuf[0]);
@@ -2638,7 +2732,7 @@ rglwidgetClass = function() {
       for (i = 0; i < thisLocs.length; i++)
         if (enabled[thisLocs[i]]) gl.disableVertexAttribArray(this[objLocs[i]]);
       if (typeof obj.userAttributes !== "undefined") {
-      	for (attr in obj.userAttribSizes) {  
+      	for (attr in obj.userAttribSizes) {  // Not all attributes may have been used
       	  gl.disableVertexAttribArray( obj.userAttribLocations[attr] );
       	}
       }
@@ -2893,7 +2987,7 @@ rglwidgetClass = function() {
       }
 
       if (typeof obj.userAttributes !== "undefined") {
-      	for (attr in obj.userAttribSizes) {  
+      	for (attr in obj.userAttribSizes) {  // Not all attributes may have been used
       	  gl.enableVertexAttribArray( obj.userAttribLocations[attr] );
       	  gl.vertexAttribPointer( obj.userAttribLocations[attr], obj.userAttribSizes[attr],
       	  			  gl.FLOAT, false, 4*obj.vOffsets.stride, 4*obj.userAttribOffsets[attr]);
@@ -2929,7 +3023,7 @@ rglwidgetClass = function() {
           continue;
 
       	mode = fat_lines && (is_lines || pmode == "lines") ? "TRIANGLES" : this.mode4type[type];
-        if (depth_sort && pmode == "filled") {
+        if (depth_sort && pmode == "filled") {// Don't try depthsorting on wireframe or points
           var faces = this.depthSort(obj),
               nfaces = faces.length,
               frowsize = Math.floor(obj.f[pass].length/nfaces);
@@ -3162,7 +3256,7 @@ rglwidgetClass = function() {
       	var i, j, ids, obj, keys, crosstalk = this.scene.crosstalk,
       	    selection, someHidden;
 
-      	
+      	// Record the message and find out if this event makes some objects have mixed values:
       	
       	crosstalk = this.scene.crosstalk;
       	
@@ -3445,7 +3539,7 @@ rglwidgetClass = function() {
       handlers.selectingend = 0;
 
       this.canvas.onmousedown = function ( ev ){
-        if (!ev.which) 
+        if (!ev.which) // Use w3c defns in preference to MS
         switch (ev.button) {
           case 0: ev.which = 1; break;
           case 1:
@@ -3780,9 +3874,9 @@ rglwidgetClass = function() {
           if (this.scene.context.rmarkdown === "ioslides_presentation") {
             this.slide.setAttribute("slideenter", "this.rgl.forEach(function(scene) { scene.lazyLoadScene.call(window);})");
           } else if (this.scene.context.rmarkdown === "slidy_presentation") {
-            
-            
-            
+            // This method would also work in ioslides, but it gets triggered
+            // something like 5 times per slide for every slide change, so
+            // you'd need a quicker function than lazyLoadScene.
             var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver,
             observer = new MutationObserver(function(mutations) {
               mutations.forEach(function(mutation) {
@@ -3901,7 +3995,7 @@ rglwidgetClass = function() {
         else
           return this.gl;
       }
-      
+      // if (!this.isInBrowserViewport()) return; Return what??? At this point we know this.gl is null.
       this.canvas.addEventListener("webglcontextrestored",
         this.onContextRestored, false);
       this.canvas.addEventListener("webglcontextlost",
@@ -3940,7 +4034,7 @@ rglwidgetClass = function() {
         gl.depthFunc(gl.LEQUAL);
         gl.clearDepth(1.0);
         gl.clearColor(1,1,1,1);
-        gl.depthMask(true); 
+        gl.depthMask(true); // Must be true before clearing depth buffer
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
         this.drawSubscene(this.scene.rootSubscene, true);
         this.drawSubscene(this.scene.rootSubscene, false);
@@ -4147,7 +4241,7 @@ rglwidgetClass = function() {
       }
 
       obj = this.getObj(control.objid);
-      
+      // First, make sure color attributes vary in original
       if (typeof obj.vOffsets !== "undefined") {
       	varies = true;
         for (k = 0; k < ncol; k++) {
@@ -4189,7 +4283,7 @@ rglwidgetClass = function() {
           ofs = ["nx", "ny", "nz", "offset"].indexOf(attrib);
           if (ofs >= 0) {
             if (ofs < 3) {
-              if (obj.normals[vertex][ofs] != newval) {  
+              if (obj.normals[vertex][ofs] != newval) {  // Assume no aliases here...
               	obj.normals[vertex][ofs] = newval;
               	obj.initialized = false;
               }
@@ -4202,7 +4296,7 @@ rglwidgetClass = function() {
             continue;
           }
         }
-        
+        // Not a plane setting...
         ofs = obj.vOffsets[ofss[attrib]];
         if (ofs < 0)
           this.alertOnce("Attribute '"+attrib+"' not found in object "+control.objid);
@@ -4259,7 +4353,7 @@ rglwidgetClass = function() {
       ages[0] = -Infinity;
       ages[ages.length-1] = Infinity;
       for (i = 0; i < steps; i++) {
-        if (births[i] !== null) {  
+        if (births[i] !== null) {  // NA in R becomes null
           age = time - births[i];
           for (j0 = 1; age > ages[j0]; j0++);
           if (ages[j0] == Infinity)
@@ -4271,7 +4365,7 @@ rglwidgetClass = function() {
           j[i] = j0;
         }
       }
-      
+      // First, make sure color attributes vary in original
       for (l = 0; l < nobjs; l++) {
       	objid = objids[l];
       	obj = this.getObj(objid);
@@ -4389,7 +4483,7 @@ rglwidgetClass = function() {
           self.drawScene();
         },
 
-        OnSliderInput = function() {
+        OnSliderInput = function() { /* "this" will be the slider */
           this.rgltimer.value = Number(this.value);
           this.rgltimer.Tick();
         },
@@ -4560,6 +4654,24 @@ rglwidgetClass = function() {
       sub.par3d.mouseMode[which] = mode;
     };
 
+/**
+ * The class of an rgl timer object
+ * @class
+*/
+
+/**
+ * Construct an rgltimerClass object
+ * @constructor
+ * @param { function } Tick - action when timer fires
+ * @param { number } startTime - nominal start time in seconds
+ * @param { number } interval - seconds between updates
+ * @param { number } stopTime - nominal stop time in seconds
+ * @param { number } stepSize - nominal step size
+ * @param { number } value - current nominal time
+ * @param { number } rate - nominal units per second
+ * @param { string } loop - "none", "cycle" or "oscillate"
+ * @param { Object } actions - list of actions
+ */
 rgltimerClass = function(Tick, startTime, interval, stopTime, stepSize, value, rate, loop, actions) {
   this.enabled = false;
   this.timerId = 0;
