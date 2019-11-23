@@ -13,4 +13,7 @@ author_profile: true
 	{% if post.title == "testOTM" %}
 		{% include fit3D.html %}
 	{% endif %}
+	{% if post.title == "alocv" %}
+		{% include image.html url="../files/alo-3.png" description="Risk estimates from ALO and LOOCV for a elastic net ($n=1000$ and $p=200$, with a search grid of length $72$), and a RBF kernel SVM ($n=300$ and $p=50$, with a search grid of length $15$). ALO took only $0.9$ seconds for the former and $0.6$ seconds for the latter, while LOOCV took $32$ and $130$ seconds, respectively." %}
+	{% endif %}
 {% endfor %}

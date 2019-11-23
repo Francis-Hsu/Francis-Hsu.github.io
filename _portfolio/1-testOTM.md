@@ -1,6 +1,6 @@
 ---
 title: "testOTM"
-excerpt: "[[GitHub]](https://github.com/Francis-Hsu/testOTM) [[Vignette]](https://francis-hsu.github.io/files/testOTM) <br/> <br/> `testOTM` is an R package that computes multivariate ranks and quantiles defined through the theory of optimal transports. It also provides several applications of these statistics, most notably the two-sample multivariate goodness-of-fit testing. The user can use this package to visualize the optimal transport map between uniform probability measure and any data-set. The following interactive plot showcases an optimal transport map between $U[0,1]^3$ and a trivariate Gaussian sample (blue points):"
+excerpt: "[[GitHub]](https://github.com/Francis-Hsu/testOTM) [[Vignette]](https://francis-hsu.github.io/files/testOTM) <br/> <br/> `testOTM` is an R package that computes multivariate ranks and quantiles defined through the theory of optimal transports. It also provides several applications of these statistics, most notably the two-sample multivariate goodness-of-fit testing. The user can use this package to visualize the optimal transport map between uniform probability measure and any data-set. The following interactive plot showcases an optimal transport map between $U[0,1]^3$ and a trivariate Gaussian sample:"
 collection: portfolio
 ---
 [[GitHub]](https://github.com/Francis-Hsu/testOTM) [[Vignette]](https://francis-hsu.github.io/files/testOTM)
