@@ -25,7 +25,7 @@ Work experience
 Skills
 ======
 * Languages: C++, R, Python
-* Softwares: LaTeX, Mathematica, MATLAB, Microsoft Office.
+* Software: LaTeX, Mathematica, MATLAB, Microsoft Office.
 
 Publications
 ======
