@@ -4,7 +4,7 @@ collection: publications
 permalink: /publication/orthoDr
 date: 2019-07-01
 venue: 'The R Journal'
-citation: 'Ruoqing Zhu, Jiyang Zhang, Ruilin Zhao, <b>Peng Xu</b>, Wenzhuo Zhou, Xin Zhang. <i>The R Journal</i>. Jul 2017.'
+citation: 'Ruoqing Zhu, Jiyang Zhang, Ruilin Zhao, <b>Peng Xu</b>, Wenzhuo Zhou, Xin Zhang. [<i>The R Journal</i>](https://journal.r-project.org/archive/2019/RJ-2019-006/index.html). Jul 2019.'
 ---
 [[PDF]](https://journal.r-project.org/archive/2019/RJ-2019-006/RJ-2019-006.pdf) [[R Package]](https://cran.r-project.org/web/packages/orthoDr/index.html)
 
