@@ -12,4 +12,5 @@ redirect_from:
 * My research interests lie across many topics: machine learning, high-dimensional statistics, non-parametric methods, and optimal transportation. I am also interested in applications of statistics in finance.
  
 ## Recent Works
+* [From GAN to Wasserstein GAN](http://francis-hsu.github.io/files/gan.pdf): a slide covering the basic of (Wasserstein) generative adversarial network (GAN).
 * `testOTM` is an R package that computes multivariate ranks and quantiles defined through the theory of optimal transportation … [[Read More]](../portfolio) {% include fit3D.html %}
