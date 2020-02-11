@@ -9,8 +9,8 @@ redirect_from:
 ---
 
 * I am a Reasearch Associate at [Columbia University](http://stat.columbia.edu/). I am currently working with Prof. [Bodhisattva Sen](http://www.stat.columbia.edu/~bodhi/Bodhi/Welcome.html), Prof. [Arian Maleki](https://sites.google.com/site/malekiarian/), and Dr. [Margaret Holen](https://www.linkedin.com/in/margaret-holen-36068547/).
-* My research interests lie across many topics: machine learning, high-dimensional statistics, non-parametric methods, and optimal transportation. I am also interested in applications of statistics in finance.
+* My research interests lie across many topics: machine learning, optimization, high-dimensional statistics, non-parametric methods, applications of statistics in finance.
  
 ## Recent Works
-* [From GAN to Wasserstein GAN](http://francis-hsu.github.io/files/gan.pdf): a slide covering the basic of (Wasserstein) generative adversarial network (GAN).
+* [From GAN to Wasserstein GAN](http://francis-hsu.github.io/files/gan.pdf): a presentation that covers the basics of the (Wasserstein) generative adversarial network (GAN).
 * `testOTM` is an R package that computes multivariate ranks and quantiles defined through the theory of optimal transportation … [[Read More]](../portfolio) {% include fit3D.html %}
