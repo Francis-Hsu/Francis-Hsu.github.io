@@ -11,10 +11,12 @@ redirect_from:
 
 Education
 ======
-* B.S. in Finance, University of Illinois at Urbana-Champaign, 2015
-* B.S. in Mathematics and Statistics, University of Illinois at Urbana-Champaign, 2015
-* M.S. in Financial Engineering, University of Illinois at Urbana-Champaign, 2016
+
+* PhD in Statistics, University of Illinois at Urbana-Champaign, Since 2020
 * M.A. in Statistics, Columbia University, 2018
+* M.S. in Financial Engineering, University of Illinois at Urbana-Champaign, 2016
+* B.S. in Mathematics and Statistics, University of Illinois at Urbana-Champaign, 2015
+* B.S. in Finance, University of Illinois at Urbana-Champaign, 2015
 
 Work experience
 ======
