@@ -8,8 +8,9 @@ redirect_from:
   - /about.html
 ---
 
-* I am a Reasearch Associate at [Columbia University](http://stat.columbia.edu/). I am currently working with Prof. [Bodhisattva Sen](http://www.stat.columbia.edu/~bodhi/Bodhi/Welcome.html), Prof. [Arian Maleki](https://sites.google.com/site/malekiarian/), and Dr. [Margaret Holen](https://www.linkedin.com/in/margaret-holen-36068547/).
-* My research interests lie across many topics: machine learning, optimization, high-dimensional statistics, non-parametric methods, applications of statistics in finance.
+* I am a PhD candidate in the Department of Statistics at Univeristy of Illinois Urbana-Champaign.
+* I received my M.A. degree in statistics from [Columbia University](http://stat.columbia.edu/). I have also worked there as a Reasearch Associate. My adiviors were Prof. [Bodhisattva Sen](http://www.stat.columbia.edu/~bodhi/Bodhi/Welcome.html), Prof. [Arian Maleki](https://sites.google.com/site/malekiarian/), and Dr. [Margaret Holen](https://www.linkedin.com/in/margaret-holen-36068547/).
+* My primary research interests are optimal transport and its application in machine learning and statistics.
  
 ## Recent Works
 * [From GAN to Wasserstein GAN](http://francis-hsu.github.io/files/gan.pdf): a presentation that covers the basics of the (Wasserstein) generative adversarial network (GAN).
