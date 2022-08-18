@@ -8,7 +8,7 @@ redirect_from:
   - /about.html
 ---
 
-* I am a PhD candidate in the Department of Statistics at University of Illinois Urbana-Champaign.
+* I am a PhD candidate in the Department of Statistics at University of Illinois Urbana-Champaign. My advisor is Prof. [Xiaohui Chen](https://publish.illinois.edu/xiaohuichen/).
 * I received my M.A. degree in statistics from [Columbia University](http://stat.columbia.edu/). I have also worked there as a Reasearch Associate. My advisors were Prof. [Bodhisattva Sen](http://www.stat.columbia.edu/~bodhi/Bodhi/Welcome.html), Prof. [Arian Maleki](https://sites.google.com/site/malekiarian/), and Dr. [Margaret Holen](https://www.linkedin.com/in/margaret-holen-36068547/).
 * My primary research interests are optimal transport and its application in machine learning and statistics.
  
