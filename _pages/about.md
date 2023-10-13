@@ -19,4 +19,4 @@ redirect_from:
 <!---
 * [From GAN to Wasserstein GAN](http://francis-hsu.github.io/files/gan.pdf): a presentation that covers the basics of the (Wasserstein) generative adversarial network (GAN).
 * `testOTM` is an R package that computes multivariate ranks and quantiles defined through the theory of optimal transportation … [[Read More]](../portfolio) {% include fit3D.html %}
---->
+-->
