@@ -14,7 +14,4 @@ redirect_from:
 
 
 ## Recent Works
-* B. Zhang, **P. Xu**, X. Chen, and Q. Zhuang. *Generative Quantum Machine Learning via Denoising Diffusion Probabilistic Models*. 2023. Submitted. arXiv: [2310.05866 [quant-ph]](https://arxiv.org/abs/2310.05866).
-
-<!-- * [From GAN to Wasserstein GAN](http://francis-hsu.github.io/files/gan.pdf): a presentation that covers the basics of the (Wasserstein) generative adversarial network (GAN).
-* `testOTM` is an R package that computes multivariate ranks and quantiles defined through the theory of optimal transportation … [[Read More]](../portfolio) {% include fit3D.html %} -->
+* B. Zhang, **P. Xu**, X. Chen, and Q. Zhuang. (2023). *Generative Quantum Machine Learning via Denoising Diffusion Probabilistic Models*. arXiv: [2310.05866 [quant-ph]](https://arxiv.org/abs/2310.05866).
