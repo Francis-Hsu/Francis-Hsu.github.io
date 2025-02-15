@@ -9,27 +9,22 @@ redirect_from:
 
 {% include base_path %}
 
-## Education
+Education
+======
 * PhD in Statistics, University of Illinois at Urbana-Champaign, Since 2020
 * M.A. in Statistics, Columbia University, 2018
 * M.S. in Financial Engineering, University of Illinois at Urbana-Champaign, 2016
 * B.S. in Mathematics and Statistics, University of Illinois at Urbana-Champaign, 2015
 * B.S. in Finance, University of Illinois at Urbana-Champaign, 2015
 
-## Awards and Honors
+Awards and Honors
+======
 * 2023 Doctoral Student Teaching Award
 
-## Courses Taught
-* Spring 2023: STAT 430 (Unsupervised Learning)
-* Fall 2022: STAT 542 (Statistical Learning)
-* Spring 2022: STAT 428 (Statistical Computing)
-* Fall 2021: STAT 428 (Statistical Computing)
-* Summer 2021: STAT 200 (Statistical Analysis)
-* Spring 2021: STAT 428 (Statistical Computing)
-* Fall 2020: CS 598 (Practical Statistical Learning)
-
-
-## Work Experiences
+Work Experiences
+======
+* Visiting Student. Department of Mathematics, University of Southern California. 2024.
+  * Advised by Prof. Xiaohui Chen and Prof. [Quntao Zhuang](https://sites.usc.edu/zhuang/).
 * Research Associate. Department of Statistics, Columbia University. 2019.
   * Advised by Prof. [Bodhisattva Sen](http://www.stat.columbia.edu/~bodhi/Bodhi/Welcome.html) and Dr. [Margaret Holen](https://www.linkedin.com/in/margaret-holen-36068547/) on seperate projects.
 
@@ -40,23 +35,22 @@ Skills
 * Software: LaTeX, Mathematica, MATLAB.
 --->
 
-## Publications
+Publications
+======
   <ul>{% for post in site.publications reversed %}
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
   
-<!---
- Talks
+Talks
 ======
-  <ul>{% for post in site.talks %}
-    {% include archive-single-talk-cv.html %}
-  {% endfor %}</ul> 
---->
+  <ul>{% for post in site.talks reversed %}
+    {% include archive-single-talk-cv.html  %}
+  {% endfor %}</ul>
   
 <!---
 Teaching
 ======
-  <ul>{% for post in site.teaching %}
+  <ul>{% for post in site.teaching reversed %}
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
   

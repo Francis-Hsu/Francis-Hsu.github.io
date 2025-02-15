@@ -7,13 +7,83 @@
 
 # Site Settings
 locale                   : "en-US"
+site_theme               : "dark"
 title                    : "Peng Xu"
 title_separator          : "-"
 name                     : &name "Peng Xu"
 description              : &description "PhD Candidate, Department of Statistics, University of Illinois Urbana-Champaign"
-url                      : https://Francis-Hsu.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url                      : "https://Francis-Hsu.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "Francis-Hsu/Francis-Hsu.github.io"
+
+# Site Author - The following control what appear as part of the author content on the side bar.
+#               If a field is blank the icon and link will not appear, otherwise it will be shown.
+#               Additional customization can be done by editing /_includes/author-profile.html
+author:
+  # Biographic information
+  avatar           : "profile.png"
+  name             : "Peng Xu"
+  pronouns         : 
+  bio              : 
+  location         : "Champaign, Illinois"
+  employer         : "University of Illinois Urbana-Champaign"
+  uri              : 
+  email            : 
+
+  # Academic websites
+  arxiv            : "https://arxiv.org/a/0000-0002-4286-6262"
+  googlescholar    : 
+  impactstory      : 
+  orcid            : "https://orcid.org/0000-0002-4286-6262"
+  semantic         : 
+  pubmed           : 
+  researchgate     : 
+  scopus           : 
+
+  # Repositories and software development
+  bitbucket        : 
+  codepen          : 
+  dribbble         : 
+  github           : "Francis-Hsu"
+  kaggle           :  
+  stackoverflow    : 
+
+  # Social media
+  bluesky          : 
+  facebook         : 
+  flickr           : 
+  foursquare       : 
+  goodreads        : 
+  google_plus      : 
+  keybase          :
+  instagram        :
+  lastfm           : 
+  linkedin         : # Username
+  mastodon         :
+  medium           :
+  pinterest        : 
+  soundcloud       : 
+  steam            :
+  telegram         : 
+  tumblr           : 
+  twitter          : 
+  vine             : 
+  weibo            : 
+  wikipedia        : 
+  xing             : 
+  youtube          : 
+  zhihu            : 
+
+# Publication Category - The following the list of publication categories and their headings
+publication_category:
+  books:
+    title: 'Books'
+  manuscripts:
+    title: 'Journal Articles'    
+  conferences:
+    title: 'Conference Papers'
+
+# Site Settings
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 breadcrumbs              : false # true, false (default)
 words_per_minute         : 160
@@ -78,47 +148,6 @@ analytics:
     tracking_id          :
 
 
-# Site Author
-author:
-  name             : "Peng Xu"
-  avatar           : "profile.png"
-  bio              : "PhD Candidate at University of Illinois Urbana-Champaign"
-  location         : "Champaign, Illinois"
-  employer         :
-  pubmed           :  # "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
-  googlescholar    :  # "http://yourfullgooglescholarurl.com"
-  email            :
-  researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
-  uri              :
-  bitbucket        :
-  codepen          :
-  dribbble         :
-  flickr           :
-  facebook         :
-  foursquare       :
-  github           : "Francis-Hsu"
-  google_plus      :
-  keybase          :
-  instagram        :
-  impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
-  lastfm           :
-  linkedin         :
-  wordpress        : randetermined
-  orcid            : # "http://orcid.org/yourorcidurl"
-  pinterest        :
-  soundcloud       :
-  stackoverflow    :
-  crossvalidated   : 29905
-  steam            :
-  tumblr           :
-  twitter          : 
-  vine             :
-  weibo            :
-  xing             :
-  youtube          :
-  wikipedia        :
-
-
 # Reading Files
 include:
   - .htaccess
@@ -129,23 +158,26 @@ exclude:
   - "*.sublime-workspace"
   - .asset-cache
   - .bundle
+  - .github
   - .jekyll-assets-cache
   - .sass-cache
-  - CHANGELOG
-  - Capfile
-  - Gemfile
-  - Gruntfile.js
-  - LICENSE
-  - README
-  - Rakefile
   - assets/js/_main.js
   - assets/js/plugins
   - assets/js/vendor
+  - CHANGELOG
+  - Capfile
   - config
+  - Dockerfile
+  - Gemfile
+  - Gruntfile.js
   - gulpfile.js
+  - LICENSE
+  - local
   - log
   - node_modules
-  - package.json
+  - package.json*
+  - Rakefile
+  - README
   - tmp
   - vendor
 keep_files:
@@ -175,7 +207,7 @@ kramdown:
   enable_coderay: false
 
 
-# Collections
+# These settings control the types of collections used by the template
 collections:
   teaching:
     output: true
@@ -191,7 +223,7 @@ collections:
     permalink: /:collection/:path/
 
 
-# Defaults
+# These settings control how pages and collections are included in the site
 defaults:
   # _posts
   - scope:
@@ -257,22 +289,25 @@ sass:
 permalink: /:categories/:title/
 # paginate: 5 # amount of posts to show
 # paginate_path: /page:num/
-timezone: America/Los_Angeles # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone: America/Chicago # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 
 # Plugins
 plugins:
+  - jekyll-feed
+  - jekyll-gist
   - jekyll-paginate
   - jekyll-sitemap
-  - jekyll-gist
-  - jekyll-feed
   - jekyll-redirect-from
-# mimic GitHub Pages with --safe
+  - jemoji
+
+# Mimic GitHub Pages with --safe
 whitelist:
+  - jekyll-feed
+  - jekyll-gist
   - jekyll-paginate
   - jekyll-sitemap
-  - jekyll-gist
-  - jekyll-feed
+  - jekyll-redirect-from
   - jemoji
 
 
