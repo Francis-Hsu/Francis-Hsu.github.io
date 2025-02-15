@@ -26,7 +26,7 @@ author:
   pronouns         : 
   bio              : 
   location         : "Champaign, Illinois"
-  employer         : "University of Illinois Urbana-Champaign"
+  employer         : "University of Illinois"
   uri              : 
   email            : 
 
@@ -58,7 +58,7 @@ author:
   keybase          :
   instagram        :
   lastfm           : 
-  linkedin         : # Username
+  linkedin         : "francishsu91"
   mastodon         :
   medium           :
   pinterest        : 
@@ -279,6 +279,7 @@ defaults:
       author_profile: true
       share: true
 
+
 # Sass/SCSS
 sass:
   sass_dir: _sass
@@ -289,7 +290,7 @@ sass:
 permalink: /:categories/:title/
 # paginate: 5 # amount of posts to show
 # paginate_path: /page:num/
-timezone: America/Chicago # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone: Etc/UTC # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 
 # Plugins
