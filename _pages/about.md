@@ -12,6 +12,6 @@ redirect_from:
 * I am broadly interested in statistical machine learning and data science. My primary research interests are optimal transport and its applications in machine learning and statistics. I am also interested in quantum machine learning and Riemannian optimization.
 
 ## Recent Works
-* **P. Xu**, C. Hou, X. Chen, R. Y. Zhang. (2025). Scalable Second-order Riemannian Optimization for $$K$$-means Clustering. [arXiv:2509.21675](https://arxiv.org/abs/2509.21675).
-* B. Zhang, **P. Xu**, X. Chen, and Q. Zhuang. (2025). Holographic deep thermalization: theory and experimentation. *Nature Communications* 16, 6341. <span style="font-variant: small-caps;">doi</span>: [10.1038/s41467-025-61546-y](https://doi.org/10.1038/s41467-025-61546-y).
-* B. Zhang, **P. Xu**, X. Chen, and Q. Zhuang. (2024). Generative Quantum Machine Learning via Denoising Diffusion Probabilistic Models. *Physical Review Letters*, 132, 100602. <span style="font-variant: small-caps;">doi</span>: [10.1103/PhysRevLett.132.100602](https://doi.org/10.1103/PhysRevLett.132.100602).
+* **P. Xu**, C. Hou, X. Chen, R. Y. Zhang. Scalable Second-order Riemannian Optimization for $$K$$-means Clustering. *The Fourteenth International Conference on Learning Representations* (ICLR 2026). [arXiv:2509.21675](https://arxiv.org/abs/2509.21675).
+* B. Zhang, **P. Xu**, X. Chen, and Q. Zhuang. Holographic deep thermalization: theory and experimentation. *Nature Communications* 16, 6341 (2025). <span style="font-variant: small-caps;">doi</span>: [10.1038/s41467-025-61546-y](https://doi.org/10.1038/s41467-025-61546-y).
+* B. Zhang, **P. Xu**, X. Chen, and Q. Zhuang. Generative Quantum Machine Learning via Denoising Diffusion Probabilistic Models. *Physical Review Letters*, 132, 100602 (2024). <span style="font-variant: small-caps;">doi</span>: [10.1103/PhysRevLett.132.100602](https://doi.org/10.1103/PhysRevLett.132.100602).
